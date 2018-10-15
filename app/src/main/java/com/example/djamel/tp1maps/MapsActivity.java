@@ -21,7 +21,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
   //  private static final String EXTRA_LOCALITATION="com.example.djamel.tp1maps";
 
-    private static  String message;
+    private static  String place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-          message = intent.getStringExtra(MainActivity.EXTRA_LOCALITATION);
+        place = intent.getStringExtra(MainActivity.EXTRA_LOCALITATION);
 
         // Capture the layout's TextView and set the string as its text
 
@@ -52,13 +52,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Add a marker in Sydney and move the camera
         Geocoder coder = new Geocoder(this);
         List<Address> address;
         try {
           //  String locationName = "Nhà hàng Blanchy Street, VietNam";
-            String locationName = message;
+            String locationName = place;
 
             //   Geocoder gc = new Geocoder(this);
             List<Address> addressList = coder.getFromLocationName(locationName, 5);
@@ -67,11 +68,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
-            LatLng sydney = new LatLng(latitude, longitude);
+          LatLng sydney = new LatLng(latitude, longitude);
 
-            //  LatLng sydney = new LatLng(0, 0);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+  // LatLng sydney = new LatLng(2.5, 55.2);
+
+            mMap.addMarker(new MarkerOptions().position(sydney).title(locationName));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,8));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
