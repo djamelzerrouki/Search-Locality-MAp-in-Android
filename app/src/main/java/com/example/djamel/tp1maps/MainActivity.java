@@ -30,4 +30,6 @@ public class MainActivity extends AppCompatActivity {
 }else Toast.makeText(this,"Add your place Search please!",Toast.LENGTH_LONG).show();
 
     }
+
+
 }

@@ -52,13 +52,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Add a marker in Sydney and move the camera
         Geocoder coder = new Geocoder(this);
         List<Address> address;
         try {
-          //  String locationName = "Nhà hàng Blanchy Street, VietNam";
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+            //  String locationName = "Nhà hàng Blanchy Street, VietNam";
             String locationName = place;
 
             //   Geocoder gc = new Geocoder(this);
